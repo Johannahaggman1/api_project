@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>API-tester</title>
+    <style>
+        #container {
+            display: flex;
+        }
+
+        #left {
+            width: 50%;
+            height: 100vh;
+            overflow-y: scroll;
+        }
+
+        #right {
+            width: 50%;
+        }
+
+        #right textarea {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(() => {
+            $(".form").on("submit", (e) => {
+                e.preventDefault();
+                var data = $(e.target).serialize();
+                if ($(e.target).find('input[name="method"]:checked').val() === "get") {
+                    $.get($(e.target).find('input[name="url"]').val(), data, (data) => {
+                        $("#serverResponse").val(data);
+                    });
+                } else {
+                    $.post($(e.target).find('input[name="url"]').val(), data, (data) => {
+                        $("#serverResponse").val(data);
+                    });
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div id="container">
+
+        <div id="left">
+                <h2>Registrera användare:</h2>
+
+            <form class="form">
+                <input type="text" name="url" placeholder="http://" value="http://localhost/ApiProjekt/V1/users/registrer.php"/><br />
+                <input type="text" name="username" placeholder="username" /><br />
+                <input type="password" name="password" placeholder="password" /><br />
+                <input type="email" name="email" placeholder="email" /><br />
+                GET: <input type="radio" name="method" value="get" checked /> POST: <input type="radio" name="method" value="post" /><br />
+
+                <input type="submit" />
+            </form>
+
+            <hr />
+
+            <h2>Logga in användare:</h2>
+
+            <form class="form">
+                <input type="text" name="url" placeholder="http://" value="http://localhost/ApiProjekt/V1/users/login.php" /><br />
+                <input type="text" name="username" placeholder="username" /><br />
+                <input type="password" name="password" placeholder="password" /><br />
+                GET: <input type="radio" name="method" value="get" checked /> POST: <input type="radio" name="method"
+                    value="post" /><br />
+                <input type="submit" />
+            </form>
+
+        <hr />
+
+        
+<!-- 
+        <h2>Lägg till post:</h2>
+
+        <form class="form">
+            <input type="text" name="url" placeholder="http://" /><br />
+            <input type="text" name="title" placeholder="title" /><br />
+            <input type="text" name="token" placeholder="token" /><br />
+            <textarea name="content" placeholder="content"></textarea><br />
+            GET: <input type="radio" name="method" value="get" checked /> POST: <input type="radio" name="method"
+                value="post" /><br />
+            <input type="submit" />
+        </form>
+
+    <hr />
+
+        <h2>Uppdatera post:</h2>
+
+        <form class="form">
+            <input type="text" name="token" placeholder="token" /><br />
+
+            <input type="text" name="url" placeholder="http://" value="http://192.168.64.2/api/posts/updatePost.php" /><br />
+            <input type="number" name="id" placeholder="id" /><br />
+
+            <input type="text" name="title" placeholder="title" /><br />
+
+            <textarea name="content" placeholder="content"></textarea><br />
+            GET: <input type="radio" name="method" value="get" checked /> POST: <input type="radio" name="method"
+                value="post" /><br />
+            <input type="submit" />
+        </form>
+
+    <hr />
+
+    <h2>Hämta en post:</h2>
+
+    <form class="form">
+        <input type="text" name="url" placeholder="http://" value="http://192.168.64.2/api/posts/getPost.php" /><br />
+        <input type="text" name="id" placeholder="id" /><br />
+
+        GET: <input type="radio" name="method" value="get" checked /> POST: <input type="radio" name="method"
+            value="post" /><br />
+        <input type="submit" />
+    </form>
+
+<hr />
+
+    <h2>Hämta alla posts:</h2>
+
+    <form class="form">
+        <input type="text" name="url" placeholder="http://" value="http://192.168.64.2/api/posts/getAllPosts.php" /><br />
+        <input type="text" name="token" placeholder="token" /><br />
+        GET: <input type="radio" name="method" value="get" checked /> POST: <input type="radio" name="method"
+            value="post" /><br />
+        <input type="submit" />
+    </form>
+</div>
+ -->
+
+
+    <div id="right">
+        <textarea id="serverResponse"></textarea>
+    </div>
+    </div>
+
+</body>
+
+</html>

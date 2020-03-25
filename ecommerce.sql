@@ -69,8 +69,6 @@ CREATE TABLE `tokens` (
 
 CREATE TABLE `users` (
   `Id` int(11) NOT NULL,
-  `firstName` varchar(50) NOT NULL,
-  `lastName` varchar(50) NOT NULL,
   `email` varchar(150) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL
