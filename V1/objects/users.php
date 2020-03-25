@@ -1,7 +1,6 @@
 <?php
-
-    include("../config/database_handler.php");
-
+    include("../../config/database_handler.php");
+   
     class User {
 
         private $database_handler;
@@ -49,6 +48,7 @@
 
         return json_encode($return_object);
        }
+       //felmeddlandet här -- ska visa var är det ifrån
        
        private function insertUserToDatabase($username_param, $password_param, $email_param) {
 
@@ -166,6 +166,9 @@
                     return json_encode($return_object);
                 } else {
                     echo "fel login";
+                    //kan du echo ut användarnman och lösenord?
+                    //har inte provat 
+                  
                 }
 
                 
@@ -261,7 +264,7 @@
     
     public function validateToken($token) {
 
-        $query_string = "SELECT userId, date_updated FROM tokens WHERE token=:token";
+        $query_string = "SELECT userd, date_updated FROM tokens WHERE token=:token";
         $statementHandler = $this->database_handler->prepare($query_string);
 
         if($statementHandler !== false ){
