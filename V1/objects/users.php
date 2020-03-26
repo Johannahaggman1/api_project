@@ -48,7 +48,7 @@
 
         return json_encode($return_object);
        }
-       //felmeddlandet här -- ska visa var är det ifrån
+    
        
        private function insertUserToDatabase($username_param, $password_param, $email_param) {
 
@@ -264,7 +264,7 @@
     
     public function validateToken($token) {
 
-        $query_string = "SELECT userd, date_updated FROM tokens WHERE token=:token";
+        $query_string = "SELECT userId, date_updated FROM tokens WHERE token=:token";
         $statementHandler = $this->database_handler->prepare($query_string);
 
         if($statementHandler !== false ){
