@@ -2,9 +2,9 @@
 
 include("../../config/database_handler.php");
 
-class Posts {
+class Products {
     private $database_handler;
-    private $post_id;
+    private $product_id;
 
     public function __construct( $database_handler_IN ) {
 
@@ -12,23 +12,23 @@ class Posts {
 
     }
 
-    public function setPostId($post_id_IN) {
+    public function setProductId($product_id_IN) {
 
-        $this->post_id = $post_id_IN;
+        $this->product_id = $product_id_IN;
 
     }
 
-    public function fetchSinglePost() {
+    public function fetchSingleProduct() {
 
-        //Ändrade WHERE id=:post_id till Id med stort i
+        //Ändrade WHERE id=:product_id till Id med stort i
         
 
-        $query_string = "SELECT Id, namn, price, stockamount FROM products WHERE id=:post_id";
+        $query_string = "SELECT Id, productName, price, stockamount FROM products WHERE Id=:product_id";
         $statementHandler = $this->database_handler->prepare($query_string);
 
         if($statementHandler !== false) {
             
-            $statementHandler->bindParam(":post_id", $this->post_id);
+            $statementHandler->bindParam(":product_id", $this->product_id);
             $statementHandler->execute();
 
             return $statementHandler->fetch();
@@ -41,9 +41,9 @@ class Posts {
         }
     }
 
-    public function fetchAllPosts() {
+    public function fetchAllProducts() {
 
-        $query_string = "SELECT Id, name, price, stockamount FROM products";
+        $query_string = "SELECT Id, productName, price, stockamount FROM products";
         $statementHandler = $this->database_handler->prepare($query_string);
 
         if($statementHandler !== false) {
@@ -58,10 +58,10 @@ class Posts {
         
     }
 
-    //Ändrade om namnen i :name_IN och tog även bort ,content_param från addPost( ).
-    public function addPost($title_param) {
+    //Ändrade om namnen i :name_IN och tog även bort ,content_param från addproduct( ).
+    public function addProduct($title_param) {
 
-        $query_string = "INSERT INTO products (name, price, stockamount) VALUES(:name_IN, 150, 20)";
+        $query_string = "INSERT INTO products (productName, price, stockamount) VALUES(:name_IN, 150, 20)";
         $statementHandler = $this->database_handler->prepare($query_string);
 
         if($statementHandler !== false) {
@@ -74,7 +74,7 @@ class Posts {
             if($success === true) {
                 echo "OK!";
             } else {
-                echo "Error while trying to insert post to database!";
+                echo "Error while trying to insert product to database!";
             }
 
         } else {
@@ -85,16 +85,16 @@ class Posts {
 
 
 
-    public function updatePost($data) {
+    public function updateProduct($data) {
 
         // Testar att byta title till name -- if(!empty($data['title'])) 
 
-        if(!empty($data['name'])) {
-            $query_string = "UPDATE products SET name=:name WHERE id=:post_id";
+        if(!empty($data['productName'])) {
+            $query_string = "UPDATE products SET productName=:productName WHERE Id=:product_id";
             $statementHandler = $this->database_handler->prepare($query_string);
 
-            $statementHandler->bindParam(":name", $data['name']);
-            $statementHandler->bindParam(":post_id", $data['Id']);
+            $statementHandler->bindParam(":productName", $data['productName']);
+            $statementHandler->bindParam(":product_id", $data['Id']);
 
             $statementHandler->execute();
             
@@ -104,20 +104,20 @@ class Posts {
         //Ändrade även [id] till [Id]
 
         if(!empty($data['stockamount'])) {
-            $query_string = "UPDATE posts SET stockamount=:stockamount WHERE id=:post_id";
+            $query_string = "UPDATE products SET stockamount=:stockamount WHERE Id=:product_id";
             $statementHandler = $this->database_handler->prepare($query_string);
 
             $statementHandler->bindParam(":stockamount", $data['stockamount']);
-            $statementHandler->bindParam(":post_id", $data['Id']);
+            $statementHandler->bindParam(":product_id", $data['Id']);
 
             $statementHandler->execute();
             
         }
 
-        $query_string = "SELECT Id, name, price, stockamount FROM products WHERE id=:post_id";
+        $query_string = "SELECT Id, productName, price, stockamount FROM products WHERE Id=:product_id";
         $statementHandler = $this->database_handler->prepare($query_string);
 
-        $statementHandler->bindParam(":post_id", $data['Id']);
+        $statementHandler->bindParam(":product_id", $data['Id']);
         $statementHandler->execute();
 
         echo json_encode($statementHandler->fetch());

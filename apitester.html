@@ -84,7 +84,7 @@
     <!-- Ändrade även name="title" till "name"  -->
         <form class="form">
             <input type="text" name="url" placeholder="http://" value="http://localhost/ApiProjekt/V1/cart/addProduct.php" /><br />
-            <input type="text" name="name" placeholder="name" /><br />
+            <input type="text" name="productName" placeholder="productName" /><br />
             <input type="text" name="token" placeholder="token" /><br />
             <!-- <textarea name="content" placeholder="content"></textarea><br /> -->
             GET: <input type="radio" name="method" value="get" checked /> POST: <input type="radio" name="method"
@@ -93,30 +93,30 @@
         </form>
 
     <hr />
-<!-- 
+
         <h2>Uppdatera post:</h2>
 
         <form class="form">
             <input type="text" name="token" placeholder="token" /><br />
 
-            <input type="text" name="url" placeholder="http://" value="http://192.168.64.2/api/posts/updatePost.php" /><br />
-            <input type="number" name="id" placeholder="id" /><br />
+            <input type="text" name="url" placeholder="http://" value="http://localhost/ApiProjekt/V1/products/updateProduct.php" /><br />
+            <input type="number" name="Id" placeholder="Id" /><br />
 
-            <input type="text" name="title" placeholder="title" /><br />
+            <input type="text" name="productName" placeholder="productName" /><br />
 
-            <textarea name="content" placeholder="content"></textarea><br />
+            <!-- <textarea name="content" placeholder="content"></textarea><br /> -->
             GET: <input type="radio" name="method" value="get" checked /> POST: <input type="radio" name="method"
                 value="post" /><br />
             <input type="submit" />
         </form>
--->
+
     <hr />
  
     <h2>Hämta en Produkt:</h2>
 
     <form class="form">
         <input type="text" name="url" placeholder="http://" value="http://localhost/ApiProjekt/V1/products/viewProduct.php" /><br />
-        <input type="text" name="id" placeholder="id" /><br />
+        <input type="text" name="Id" placeholder="Id" /><br />
 
         GET: <input type="radio" name="method" value="get" checked /> POST: <input type="radio" name="method"
             value="post" /><br />

@@ -2,7 +2,7 @@
 include('../objects/products.php');
 include('../objects/users.php');
 
-$posts_object = new Posts($databaseHandler);
+$products_object = new Products($databaseHandler);
 $user_handler = new User($databaseHandler);
 
 $token = $_POST['token'];
@@ -13,7 +13,7 @@ if($user_handler->validateToken($token) === false) {
 }
 
 echo "<pre>";
-print_r($posts_object->fetchAllPosts());
+print_r($products_object->fetchAllProducts());
 echo "</pre>";
 
 
