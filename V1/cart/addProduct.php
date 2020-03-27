@@ -1,8 +1,8 @@
 <?php
 include("../objects/products.php");
-$products_object = new Product($databaseHandler);
+$products_object = new Products($databaseHandler);
 
-$title_IN = ( isset($_GET['name']) ? $_GET['name'] : '' );
+$title_IN = ( isset($_GET['productName']) ? $_GET['productName'] : '' );
 // $content_IN = ( isset($_GET['content']) ? $_GET['content'] : '' );
 
 

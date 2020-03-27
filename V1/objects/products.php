@@ -125,6 +125,34 @@ class Products {
 
     }
 
+
+    // Ett försök att skapa DELETEproduct funktion
+
+    public function deleteProduct($data) {
+
+
+        if(!empty($data['Id'])) {
+            $query_string = "DELETE FROM products WHERE Id=:product_id";
+            $statementHandler = $this->database_handler->prepare($query_string);
+
+            $statementHandler->bindParam(":product_id", $data['Id']);
+
+            $statementHandler->execute();
+            
+        }
+
+    
+        $query_string = "SELECT Id FROM products WHERE Id=:product_id";
+        $statementHandler = $this->database_handler->prepare($query_string);
+
+        $statementHandler->bindParam(":product_id", $data['Id']);
+        $statementHandler->execute();
+
+        echo json_encode($statementHandler->fetch());
+
+
+    }
+
 }
 
 
