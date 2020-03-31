@@ -83,7 +83,7 @@
 
     <!-- Ändrade även name="title" till "name"  -->
         <form class="form">
-            <input type="text" name="url" placeholder="http://" value="http://localhost/ApiProjekt/V1/cart/addProduct.php" /><br />
+            <input type="text" name="url" placeholder="http://" value="http://localhost/ApiProjekt/V1/products/addProduct.php" /><br />
             <input type="text" name="productName" placeholder="productName" /><br />
             <input type="text" name="token" placeholder="token" /><br />
             <!-- <textarea name="content" placeholder="content"></textarea><br /> -->
@@ -152,6 +152,16 @@
 
 <hr />
 
+<h2>Lägg till produkt i varukorg:</h2>
+<form class="form">
+    <input type="text" name="url" placeholder="http://" value="http://localhost/ApiProjekt/V1/cart/addToCart.php" /><br />
+    <input type="number" name="productAmount" placeholder="amount"> <br />
+    <input type="number" name="productId" placeholder="productId" /><br />
+    <input type="text" name="tokenId" placeholder="tokenId" /><br />
+    GET: <input type="radio" name="method" value="get" checked /> POST: <input type="radio" name="method"
+    value="post" /><br />
+    <input type="submit" />
+</form>
 </div>
 
     <div id="right">

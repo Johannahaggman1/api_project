@@ -51,6 +51,7 @@ class Products {
             $statementHandler->execute();
             return $statementHandler->fetchAll();
 
+
         } else {
             echo "Could not create database statement!";
             die();
@@ -83,7 +84,7 @@ class Products {
         }
     } 
 
-
+ 
 
     public function updateProduct($data) {
 
