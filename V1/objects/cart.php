@@ -69,7 +69,30 @@ class Cart {
     }
 
 
+    public function deleteCart($data) {
 
+
+        if(!empty($data['Id'])) {
+            $query_string = "DELETE FROM cart WHERE Id=:cart_id";
+            $statementHandler = $this->database_handler->prepare($query_string);
+
+            $statementHandler->bindParam(":cart_id", $data['Id']);
+
+            $statementHandler->execute();
+            
+        }
+
+    
+        $query_string = "SELECT Id FROM cart WHERE Id=:cart_id";
+        $statementHandler = $this->database_handler->prepare($query_string);
+
+        $statementHandler->bindParam(":cart_id", $data['Id']);
+        $statementHandler->execute();
+
+        echo json_encode($statementHandler->fetch());
+
+
+    }
 
 
 
