@@ -60,7 +60,7 @@ class Cart {
 
             return $statementHandler->fetch();
 
-
+//$this->user_id
 
         } else {
             echo "Could not create database statement!";

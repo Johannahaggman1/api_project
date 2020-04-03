@@ -1,8 +1,35 @@
 <?php
 include("../objects/products.php");
-$products_object = new Products($databaseHandler);
+include("../objects/users.php"); 
 
-$title_IN = ( isset($_GET['productName']) ? $_GET['productName'] : '' );
+$products_object = new Products($databaseHandler);
+$user_handler = new User($databaseHandler);
+//ANDERS KOD
+//$posts_object = new Posts($databaseHandler);
+
+
+
+$token = $_POST['token'];
+
+if($user_handler->validateToken($token) === false) {
+    echo "Invalid token!";
+    die;
+}
+
+$isAdmin = $user_handler->isAdmin($token);
+
+if($isAdmin === false) {
+    echo "You are not admin";
+    die;
+}
+
+
+// SLUT 
+
+
+
+
+$title_IN = ( isset($_POST['productName']) ? $_POST['productName'] : '' );
 // $content_IN = ( isset($_GET['content']) ? $_GET['content'] : '' );
 
 
