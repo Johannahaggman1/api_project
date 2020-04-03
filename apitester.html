@@ -157,11 +157,23 @@
     <input type="text" name="url" placeholder="http://" value="http://localhost/ApiProjekt/V1/cart/addToCart.php" /><br />
     <input type="number" name="productAmount" placeholder="amount"> <br />
     <input type="number" name="productId" placeholder="productId" /><br />
-    <input type="text" name="tokenId" placeholder="tokenId" /><br />
+    <input type="text" name="token" placeholder="token" /><br />
+    <input type="number" name="userId" placeholder="userId" /><br />
     GET: <input type="radio" name="method" value="get" checked /> POST: <input type="radio" name="method"
     value="post" /><br />
     <input type="submit" />
 </form>
+
+<h2>Hämta varukorg:</h2>
+<form class="form">
+    <input type="text" name="url" placeholder="http://" value="http://localhost/ApiProjekt/V1/cart/viewCart.php" /><br /> 
+    <input type="text" name="token" placeholder="token" /><br />
+    <input type="number" name="userId" placeholder="userId" /><br />
+    GET: <input type="radio" name="method" value="get" checked /> POST: <input type="radio" name="method"
+    value="post" /><br />
+    <input type="submit" />
+</form>
+
 </div>
 
     <div id="right">
