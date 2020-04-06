@@ -14,7 +14,7 @@ class Cart {
 
     public function setCartId($cart_id_IN) {
 
-        $this->cart_id = $cart_id_IN;
+        $this->cartID = $cart_id_IN;
 
     } 
 
@@ -45,7 +45,7 @@ class Cart {
         }
     }
 
-    public function fetchCart() {
+/*     public function fetchCart() {
 
         //Ändrade WHERE id=:product_id till Id med stort i
         
@@ -58,15 +58,34 @@ class Cart {
             $statementHandler->bindParam(":userId", $this->user_id);
             $statementHandler->execute();
 
-            return $statementHandler->fetch();
+            return $statementHandler->fetchAll();
 
-//$this->user_id
+           
 
         } else {
             echo "Could not create database statement!";
             die();
         }
-    }
+    } */
+
+    //ANNAS
+
+    public function fetchCart() {
+
+        $query_string = "SELECT Id, productAmount, productID, userID FROM Cart";
+        $statementHandler = $this->database_handler->prepare($query_string);
+
+        if($statementHandler !== false) {
+
+            $statementHandler->execute();
+            return $statementHandler->fetchAll();
+
+        } else {
+            echo "Could not create database statement!";
+            die();
+        }
+        
+    } 
 
 
     public function deleteCart($data) {

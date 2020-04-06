@@ -1,21 +1,15 @@
 <?php
 
-
-// FUNKAR ABSOLUT INTE DEHÄR JVLA SKITEN, 
-//tror de e SetCartId som inte lirar ? men vad vet jag 
-include("../objects/cart.php");
-include("../objects/users.php");
+include('../objects/Cart.php');
+include('../objects/Users.php');
 
 $cart_object = new Cart($databaseHandler);
 $user_handler = new User($databaseHandler);
 
 
-
 $token = $_POST['token'];
 $cartID = ( !empty($_POST['userId'] ) ? $_POST['userId'] : -1 );
-
-$cart_object->setCartId($cartID);
-print_r( $cart_object->fetchCart() );
+ 
 
 if($user_handler->validateToken($token) === false) {
     $retObject = new stdClass;
@@ -24,8 +18,6 @@ if($user_handler->validateToken($token) === false) {
     echo json_encode($retObject);
     die();
 } 
-
-//Kan det va så att det inte funkar för att vi inte har med nån "user_id" som han har i sin fetchSingelPost() funktion? 
 
 
 if($cartID > -1) {
@@ -38,5 +30,4 @@ if($cartID > -1) {
     echo "Error: Missing parameter id!";
 
 }
-
 ?>
