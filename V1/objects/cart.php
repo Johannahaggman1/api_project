@@ -45,31 +45,6 @@ class Cart {
         }
     }
 
-/*     public function fetchCart() {
-
-        //Ändrade WHERE id=:product_id till Id med stort i
-        
-
-        $query_string = "SELECT Id, productAmount, userId, productId FROM cart WHERE userId=:userId";
-        $statementHandler = $this->database_handler->prepare($query_string);
-
-        if($statementHandler !== false) {
-            
-            $statementHandler->bindParam(":userId", $this->user_id);
-            $statementHandler->execute();
-
-            return $statementHandler->fetchAll();
-
-           
-
-        } else {
-            echo "Could not create database statement!";
-            die();
-        }
-    } */
-
-    //ANNAS
-
     public function fetchCart() {
 
         $query_string = "SELECT Id, productAmount, productID, userID FROM Cart";

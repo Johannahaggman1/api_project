@@ -43,7 +43,27 @@ class Products {
 
     public function fetchAllProducts() {
 
-        $query_string = "SELECT Id, productName, price, stockamount FROM products";
+        $order = "";
+        $query_string = "SELECT Id, productName, price, stockamount FROM products ORDER BY price";
+        $statementHandler = $this->database_handler->prepare($query_string);
+
+        if($statementHandler !== false) {
+
+            $statementHandler->execute();
+            return $statementHandler->fetchAll();
+
+
+        } else {
+            echo "Could not create database statement!";
+            die();
+        }
+        
+    }
+
+    public function fetchAllProductsDESC() {
+
+       
+        $query_string = "SELECT Id, productName, price, stockamount FROM products ORDER BY price DESC";
         $statementHandler = $this->database_handler->prepare($query_string);
 
         if($statementHandler !== false) {
@@ -60,15 +80,17 @@ class Products {
     }
 
     //Ändrade om namnen i :name_IN och tog även bort ,content_param från addproduct( ).
-    public function addProduct($title_param) {
+    public function addProduct($productName_param, $price_param, $stockamount_param) {
 
-        $query_string = "INSERT INTO products (productName, price, stockamount) VALUES(:name_IN, 150, 20)";
+        $query_string = "INSERT INTO products (productName, price, stockamount) VALUES(:name_IN, :price_IN, :stockamount_IN)";
         $statementHandler = $this->database_handler->prepare($query_string);
 
         if($statementHandler !== false) {
 
-            $statementHandler->bindParam(":name_IN", $title_param);
-           /*  $statementHandler->bindParam(":content_IN", $content_param); */
+            $statementHandler->bindParam(":name_IN", $productName_param);
+            $statementHandler->bindParam(":price_IN", $price_param);
+            $statementHandler->bindParam(":stockamount_IN", $stockamount_param);
+         
             
             $success = $statementHandler->execute();
 
@@ -88,13 +110,24 @@ class Products {
 
     public function updateProduct($data) {
 
-        // Testar att byta title till name -- if(!empty($data['title'])) 
+    
 
         if(!empty($data['productName'])) {
             $query_string = "UPDATE products SET productName=:productName WHERE Id=:product_id";
             $statementHandler = $this->database_handler->prepare($query_string);
 
             $statementHandler->bindParam(":productName", $data['productName']);
+            $statementHandler->bindParam(":product_id", $data['Id']);
+
+            $statementHandler->execute();
+            
+        }
+
+        if(!empty($data['price'])) {
+            $query_string = "UPDATE products SET price=:price WHERE Id=:product_id";
+            $statementHandler = $this->database_handler->prepare($query_string);
+
+            $statementHandler->bindParam(":price", $data['price']);
             $statementHandler->bindParam(":product_id", $data['Id']);
 
             $statementHandler->execute();

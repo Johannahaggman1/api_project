@@ -85,8 +85,9 @@
         <form class="form">
             <input type="text" name="url" placeholder="http://" value="http://localhost/ApiProjekt/V1/products/addProduct.php" /><br />
             <input type="text" name="productName" placeholder="productName" /><br />
+            <input type="number" name="price" placeholder="price" /><br /> 
+            <input type="number" name="stockAmount" placeholder="stockamount"><br />
             <input type="text" name="token" placeholder="token" /><br />
-            <!-- <textarea name="content" placeholder="content"></textarea><br /> -->
             GET: <input type="radio" name="method" value="get" checked /> POST: <input type="radio" name="method"
                 value="post" /><br />
             <input type="submit" />
@@ -94,7 +95,7 @@
 
     <hr />
 
-        <h2>Uppdatera post:</h2>
+        <h2>Uppdatera produkt:</h2>
 
         <form class="form">
             <input type="text" name="token" placeholder="token" /><br />
@@ -103,6 +104,7 @@
             <input type="number" name="Id" placeholder="Id" /><br />
 
             <input type="text" name="productName" placeholder="productName" /><br />
+            <input type="number" name="price" placeholder="price" /><br /> 
 
             <!-- <textarea name="content" placeholder="content"></textarea><br /> -->
             GET: <input type="radio" name="method" value="get" checked /> POST: <input type="radio" name="method"
@@ -130,6 +132,7 @@
     <form class="form">
         <input type="text" name="url" placeholder="http://" value="http://localhost/ApiProjekt/V1/products/viewAllProducts.php" /><br />
         <input type="text" name="token" placeholder="token" /><br />
+        Sortera efter: Fallande<input type="radio" name="desc" value="desc"> Stigande<input type="radio" name="asc" value="asc" /><br />
         GET: <input type="radio" name="method" value="get" checked /> POST: <input type="radio" name="method"
             value="post" /><br />
         <input type="submit" />
@@ -174,7 +177,7 @@
     <input type="submit" />
 </form>
 
-<h2>Radera Cart:</h2>
+<h2>Radera varukorgsrad:</h2>
 
 <form class="form">
     <input type="text" name="token" placeholder="token" /><br />

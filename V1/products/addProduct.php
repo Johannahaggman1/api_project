@@ -4,10 +4,6 @@ include("../objects/users.php");
 
 $products_object = new Products($databaseHandler);
 $user_handler = new User($databaseHandler);
-//ANDERS KOD
-//$posts_object = new Posts($databaseHandler);
-
-
 
 $token = $_POST['token'];
 
@@ -24,23 +20,23 @@ if($isAdmin === false) {
 }
 
 
-// SLUT 
+$productName_IN = ( isset($_POST['productName']) ? $_POST['productName'] : '' );
+$price_IN = ( isset($_POST['price']) ? $_POST['price'] : '' );
+$stockamount_IN = ( isset($_POST['stockAmount']) ? $_POST['stockAmount'] : '' );
 
 
+ if(!empty($productName_IN)) {
+   if(!empty($price_IN)) {
+      if (!empty($stockamount_IN )){
 
+         $products_object->addProduct($productName_IN, $price_IN, $stockamount_IN);
+      } else {
+         echo "Error: Stockamount cannot be empty!";
+      }  
 
-$title_IN = ( isset($_POST['productName']) ? $_POST['productName'] : '' );
-// $content_IN = ( isset($_GET['content']) ? $_GET['content'] : '' );
-
-
- if(!empty($title_IN)) {
-  // if(!empty($content_IN)) {
- // tog bort  $products_object->addproduct($title_IN, >>>>$content_IN<<<<<<); ur raden nedan
-       $products_object->addProduct($title_IN);
-
-   // } else {
-   /*     echo "Error: content cannot be empty!";
-    }  */
+   } else {
+       echo "Error: content cannot be empty!";
+    }  
  } else {
     echo "Error: titel cannot be empty!";
  }
