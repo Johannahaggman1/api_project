@@ -1,19 +1,19 @@
 <?php
-include('../objects/products.php');
-include('../objects/users.php');
+include('../../objects/products.php');
+include('../../objects/users.php');
 
 $products_object = new Products($databaseHandler);
 $user_handler = new User($databaseHandler);
 
 $token = $_POST['token'];
-//Försök att sortera
+
 
  if($user_handler->validateToken($token) === false) {
     echo "Invalid token!";
     die;
 } 
 
-if(isset($_POST['desc'])) {
+if(isset($_POST['order']) && $_POST['order'] == "desc") {
     echo "<pre>";
     print_r($products_object->fetchAllProductsDESC());
     echo "</pre>";
@@ -22,13 +22,6 @@ if(isset($_POST['desc'])) {
     print_r($products_object->fetchAllProducts());
     echo "</pre>";
  }
-
-
-
-/* echo "<pre>";
-print_r($products_object->fetchAllProducts());
-echo "</pre>";
- */
 
 
 ?>

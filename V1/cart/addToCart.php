@@ -1,7 +1,7 @@
 <?php
-include("../objects/cart.php");
-include("../objects/users.php");
-include("../objects/products.php");
+include("../../objects/cart.php");
+include("../../objects/users.php");
+include("../../objects/products.php");
 
 $cart_object = new Cart ($databaseHandler);
 $user_handler = new User($databaseHandler);

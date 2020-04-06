@@ -1,7 +1,7 @@
 <?php
 
-include('../objects/Cart.php');
-include('../objects/Users.php');
+include('../../objects/Cart.php');
+include('../../objects/Users.php');
 
 $cart_object = new Cart($databaseHandler);
 $user_handler = new User($databaseHandler);
@@ -23,7 +23,7 @@ if($user_handler->validateToken($token) === false) {
 if($cartID > -1) {
 
     $cart_object->setCartId($cartID);
-    print_r( $cart_object->fetchCart() );
+    print_r( $cart_object->fetchCart($cartID) );
 
 } else {
 

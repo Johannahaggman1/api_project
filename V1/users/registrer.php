@@ -1,6 +1,6 @@
 <?php
 
-    include("../objects/users.php");
+    include("../../objects/users.php");
 
     $user_handler = new User($databaseHandler);
 

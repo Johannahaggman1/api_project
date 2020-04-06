@@ -1,6 +1,6 @@
 <?php
-include('../objects/products.php');
-include('../objects/users.php');
+include('../../objects/products.php');
+include('../../objects/users.php');
 
 $product_handler = new Products($databaseHandler);
 $user_handler = new User($databaseHandler);

@@ -1,6 +1,6 @@
 <?php
-include('../objects/cart.php');
-include('../objects/users.php');
+include('../../objects/cart.php');
+include('../../objects/users.php');
 
 $cart_handler = new Cart($databaseHandler);
 $user_handler = new User($databaseHandler);
