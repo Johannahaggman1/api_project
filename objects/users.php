@@ -86,6 +86,7 @@
        }
 
 
+
        private function isUsernameTaken( $username_param ) {
 
             $query_string = "SELECT COUNT(Id) FROM users WHERE username=:username";

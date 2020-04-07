@@ -106,8 +106,6 @@
 
             <input type="text" name="productName" placeholder="productName" /><br />
             <input type="number" name="price" placeholder="price" /><br /> 
-
-            <!-- <textarea name="content" placeholder="content"></textarea><br /> -->
             GET: <input type="radio" name="method" value="get" checked /> POST: <input type="radio" name="method"
                 value="post" /><br />
             <input type="submit" />
@@ -157,7 +155,7 @@
 
 <h2>Lägg till produkt i varukorg:</h2>
 <form class="form">
-    <input type="text" name="url" placeholder="http://" value="http://localhost/ApiProjekt/V1/cart/addToCart.php" /><br />
+    <input type="text" name="url" placeholder="http://" value="http://localhost/ApiProjekt/V1/orderrow/addToOrderrow.php" /><br />
     <input type="number" name="productAmount" placeholder="productAmount" /> <br />
     <input type="number" name="productId" placeholder="productId" /><br />
     <input type="text" name="token" placeholder="token" /><br />
@@ -169,9 +167,9 @@
 
 <h2>Hämta varukorg:</h2>
 <form class="form">
-    <input type="text" name="url" placeholder="http://" value="http://localhost/ApiProjekt/V1/cart/viewCart.php" /><br /> 
+    <input type="text" name="url" placeholder="http://" value="http://localhost/ApiProjekt/V1/orderrow/viewOrderrow.php" /><br /> 
     <input type="text" name="token" placeholder="token" /><br />
-    <input type="number" name="userId" placeholder="userId" /><br />
+    <input type="number" name="orderId" placeholder="orderId" /><br />
     GET: <input type="radio" name="method" value="get" checked /> POST: <input type="radio" name="method"
     value="post" /><br />
     <input type="submit" />
@@ -181,12 +179,24 @@
 
 <form class="form">
     <input type="text" name="token" placeholder="token" /><br />
-    <input type="text" name="url" placeholder="http://" value="http://localhost/ApiProjekt/V1/cart/deleteCart.php" /><br />
+    <input type="text" name="url" placeholder="http://" value="http://localhost/ApiProjekt/V1/orderrow/deleteOrderrow.php" /><br />
     <input type="number" name="Id" placeholder="Id" /><br />
     GET: <input type="radio" name="method" value="get" checked /> POST: <input type="radio" name="method"
         value="post" /><br />
     <input type="submit" />
 </form>
+
+<h2>:</h2>
+<form class="form">
+    <input type="text" name="token" placeholder="token" /><br />
+    <input type="text" name="url" placeholder="http://" value="http://localhost/ApiProjekt/V1/orderrow/deleteOrderrow.php" /><br />
+    <input type="number" name="orderId" placeholder="orderId" /><br />
+    GET: <input type="radio" name="method" value="get" checked /> POST: <input type="radio" name="method"
+        value="post" /><br />
+    <input type="submit" />
+</form>
+
+
 
 </div>
 

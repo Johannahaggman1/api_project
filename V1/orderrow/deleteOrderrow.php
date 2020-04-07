@@ -1,8 +1,8 @@
 <?php
-include('../../objects/cart.php');
+include('../../objects/orderrows.php');
 include('../../objects/users.php');
 
-$cart_handler = new Cart($databaseHandler);
+$orderrow_handler = new Orderrow($databaseHandler);
 $user_handler = new User($databaseHandler);
 
 if(!empty($_POST['token'])) {
@@ -19,8 +19,8 @@ if(!empty($_POST['token'])) {
             die();
         }
 
-        $cart_handler->deleteCart($_POST);
-        echo "Cart har nu raderats";
+        $orderrow_handler->deleteOrderrow($_POST);
+        echo "orderrow har nu raderats";
 
 
     } else {
