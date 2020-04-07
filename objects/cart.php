@@ -18,23 +18,24 @@ class Cart {
 
     } 
 
-    public function addProductToCart($productAmount_param, $productId_param, $userId_param) {
+    public function addProductToCart($productAmount_param, $totalPrice_param, $productId_param, $userId_param) {
 
 
-        $query_string = "INSERT INTO cart (productAmount, productId, userId) VALUES(:productAmount_IN, :productId_IN, :userId_IN)";
+        $query_string = "INSERT INTO cart (productAmount, totalPrice, productId, userId) VALUES(:productAmount_IN, :totalPrice_IN, :productId_IN, :userId_IN)";
         $statementHandler = $this->database_handler->prepare($query_string);
 
         if($statementHandler !== false) {
 
             $statementHandler->bindParam(":productAmount_IN", $productAmount_param);
+            $statementHandler->bindParam(":totalPrice_IN", $totalPrice_param);
             $statementHandler->bindParam(":productId_IN", $productId_param);
             $statementHandler->bindParam(":userId_IN", $userId_param);
-          
             
+
             $success = $statementHandler->execute();
 
             if($success === true) {
-                echo "Produkten är nu lagd i varukorgen < /br>";
+                echo "Produkten är nu lagd i varukorgen";
             } else {
                 echo "Error while trying to insert product to database!";
             }
@@ -62,7 +63,6 @@ class Cart {
         }
         
     } 
-
 
     public function deleteCart($data) {
 

@@ -14,9 +14,16 @@ if(!empty($_POST['token'])) {
         if($user_handler->validateToken($token) === false) {
             $retObject = new stdClass;
             $retObject->error = "Token is invalid";
-            $retObject->errorCode = 1338;
+            $retObject->errorCode = 554;
             echo json_encode($retObject);
             die();
+        }
+
+        $isAdmin = $user_handler->isAdmin($token);
+
+        if($isAdmin === false) {
+        echo "You are not admin";
+        die;
         }
 
         $product_handler->updateProduct($_POST);
@@ -27,7 +34,7 @@ if(!empty($_POST['token'])) {
         // här borde man kanske skapa en separat funktion i ex "users.php" dit man hänvisar så man slipper upprepa. 
         $retObject = new stdClass;
         $retObject->error = "Invalid id!";
-        $retObject->errorCode = 1336;
+        $retObject->errorCode = 556;
 
         echo json_encode($retObject);
     }
@@ -35,7 +42,7 @@ if(!empty($_POST['token'])) {
 } else {
     $retObject = new stdClass;
     $retObject->error = "No token found!";
-    $retObject->errorCode = 1337;
+    $retObject->errorCode = 557;
 
     echo json_encode($retObject);
 }

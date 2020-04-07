@@ -5,20 +5,23 @@ include("../../objects/products.php");
 
 $cart_object = new Cart ($databaseHandler);
 $user_handler = new User($databaseHandler);
-// echo $cart_object->addProductToCart($_POST['tokenId'], $_POST['productId'], $_POST['productAmount']);
+$product_object = new Products($databaseHandler);
 
 
-$productAmount_IN = ( isset($_GET['productAmount']) ? $_GET['productAmount'] : '' );
-$productId_IN = ( isset($_GET['productId']) ? $_GET['productId'] : '' );
-$tokenId_IN = ( isset($_GET['token']) ? $_GET['token'] : '' );
-$userId_IN = ( isset($_GET['userId']) ? $_GET['userId'] : '');
+$productAmount_IN = ( isset($_POST['productAmount']) ? $_POST['productAmount'] : '' );
+$productId_IN = ( isset($_POST['productId']) ? $_POST['productId'] : '' );
+$tokenId_IN = ( isset($_POST['token']) ? $_POST['token'] : '' );
+$userId_IN = ( isset($_POST['userId']) ? $_POST['userId'] : '');
+
+$productPrice = $product_object->getProductPrice($productId_IN);
+$totalPrice_IN = $productAmount_IN * $productPrice['0'];
 
  
-if(!empty($productAmount_IN)) {
+ if(!empty($productAmount_IN)) {
    if(!empty($productId_IN)) {
       if(!empty($tokenId_IN)) {
 
-         $token = $_GET['token'];
+         $token = $_POST['token'];
 
          if($user_handler->validateToken($token) === false) {
              $retObject = new stdClass;
@@ -28,7 +31,7 @@ if(!empty($productAmount_IN)) {
              die();
          }
 
-       $cart_object->addProductToCart($productAmount_IN, $productId_IN, $userId_IN);
+       $cart_object->addProductToCart($productAmount_IN, $totalPrice_IN, $productId_IN, $userId_IN);
      
       } else {
          echo "Error: TokenId cannot be empty!";
@@ -38,7 +41,7 @@ if(!empty($productAmount_IN)) {
    }
 } else {
    echo "Error: productamount cannot be empty!";
-}
+} 
 
 
 

@@ -43,7 +43,7 @@ class Products {
 
     public function fetchAllProducts() {
 
-        $order = "";
+        
         $query_string = "SELECT Id, productName, price, stockamount FROM products ORDER BY price";
         $statementHandler = $this->database_handler->prepare($query_string);
 
@@ -79,7 +79,7 @@ class Products {
         
     }
 
-    //Ändrade om namnen i :name_IN och tog även bort ,content_param från addproduct( ).
+   
     public function addProduct($productName_param, $price_param, $stockamount_param) {
 
         $query_string = "INSERT INTO products (productName, price, stockamount) VALUES(:name_IN, :price_IN, :stockamount_IN)";
@@ -186,6 +186,27 @@ class Products {
 
 
     }
+
+    public function getProductPrice($productId_param) {
+
+        $query_string = "SELECT price FROM products WHERE Id=:productId_IN";
+        $statementHandler = $this->database_handler->prepare($query_string);
+
+        if($statementHandler !== false) {
+            
+            $statementHandler->bindParam(":productId_IN", $productId_param);
+            $statementHandler->execute();
+
+            return $statementHandler->fetch();
+
+        } else {
+            echo "Could not create database statement!";
+            die();
+        }
+
+
+    }
+
 
 }
 

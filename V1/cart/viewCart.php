@@ -5,7 +5,7 @@ include('../../objects/Users.php');
 
 $cart_object = new Cart($databaseHandler);
 $user_handler = new User($databaseHandler);
-
+$product_handler = new Product($databaseHandler);
 
 $token = $_POST['token'];
 $cartID = ( !empty($_POST['userId'] ) ? $_POST['userId'] : -1 );
