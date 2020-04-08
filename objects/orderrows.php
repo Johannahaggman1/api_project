@@ -18,21 +18,71 @@ class Orderrow {
 
     } 
 
-    public function createCart($userId_param) {
-        $query_string = "INSERT INTO cart (userId) VALUES(:userId_IN)";
+    public function checkoutCart($checkoutStatus_param, $userId_param) {
+        $query_string = "UPDATE cart SET checkoutStatus=:checkoutStatus_IN WHERE userId=:userId_IN";
         $statementHandler = $this->database_handler->prepare($query_string);
 
         if($statementHandler !== false) {
 
+            $statementHandler->bindParam(":checkoutStatus_IN", $checkoutStatus_param);
             $statementHandler->bindParam(":userId_IN", $userId_param);
             $statementHandler->execute();
             
-            $return = $statementHandler->fetch();
+            //$return = $statementHandler->fetch();
 
         } else {
             echo "Couldn't create statement handler!";
         }
 
+       }
+
+       public function getStockAmount($cartId_param) {
+        $query_string = "SELECT stockamount FROM orderrows JOIN products ON orderrows.productId=products.Id WHERE cartId=:cartId_IN";
+        $statementHandler = $this->database_handler->prepare($query_string);
+
+        if($statementHandler !== false) {
+
+            $statementHandler->bindParam(":cartId_IN", $cartId_param);
+
+            $statementHandler->execute();
+            return $statementHandler->fetch();
+
+            } else {
+                echo "Error while trying to insert product to database!";
+            }
+       }
+
+       public function getProductId($cartId_param) {
+        $query_string = "SELECT productId FROM orderrows WHERE cartId=cartId_IN";
+        $statementHandler = $this->database_handler->prepare($query_string);
+
+        if($statementHandler !== false) {
+
+            $statementHandler->bindParam(":cartId_IN", $cartId_param);
+
+            $statementHandler->execute();
+            return $statementHandler->fetchAll();
+
+            } else {
+                echo "Error while trying to insert product to database!";
+            }
+       }
+
+
+
+       public function updatestockAmount ($cartId_param) {
+
+        $query_string = "UPDATE orderrows JOIN products ON orderrows.productId= products.Id SET stockAmount=stockAmount-productAmount WHERE cartId=:cartId_IN";
+        $statementHandler = $this->database_handler->prepare($query_string);
+
+        if($statementHandler !== false) {
+            $statementHandler->bindParam(":cartId_IN", $cartId_param);
+
+            $statementHandler->execute();
+
+        } else {
+                echo "Error while trying to insert product to database!";
+        }
        }
 
        public function getCartId($userId_param) {
@@ -157,9 +207,26 @@ class Orderrow {
 
     }
 
+    public function checkCartId ($cartId_param) {
+        $query_string = "SELECT Id FROM cart WHERE Id=:cartId_IN";
+        $statementHandler = $this->database_handler->prepare($query_string);
+
+        if($statementHandler !== false) {
+
+            $statementHandler->bindParam(":cartId_IN", $cartId_param);
+            $statementHandler->execute();
+
+            return $statementHandler->fetch();
+
+        } else {
+            echo "Could not create database statement!";
+            die();
+        }
+    }
+
     public function CreateOrder($orderrowId_param, $checkoutStatus_param) {
  
-        $query_string = "INSERT INTO orders (orderrowId, checkoutStatus) VALUES (:orderrowId_IN, :checkoutStatus_IN)";
+        $query_string = "INSERT INTO cart (checkoutStatus) VALUES (:checkoutStatus_IN) WHERE cartId=:cartId_IN";
         $statementHandler = $this->database_handler->prepare($query_string);
 
         if($statementHandler !== false) {

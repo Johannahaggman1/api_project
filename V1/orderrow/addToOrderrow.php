@@ -32,9 +32,9 @@ $totalPrice_IN = $productAmount_IN * $productPrice['0'];
              die();
          }
       
-         $test = $orderrow_object->checkUserId($userId_IN);
+         $existingCartId = $orderrow_object->checkUserId($userId_IN);
 
-         if (($test[0] == $userId_IN) === true ) {
+         if (($existingCartId[0] == $userId_IN) === true ) {
             $cartId = $orderrow_object->getCartId($userId_IN);
             $cartId_IN = $cartId['0'];
             $orderrow_object->addProductToOrderrow($productAmount_IN, $totalPrice_IN, $productId_IN, $cartId_IN);
