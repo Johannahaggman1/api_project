@@ -16,7 +16,6 @@ $userId_IN = ( isset($_POST['userId']) ? $_POST['userId'] : '');
 
 $productPrice = $product_object->getProductPrice($productId_IN);
 $totalPrice_IN = $productAmount_IN * $productPrice['0'];
-
  
  if(!empty($productAmount_IN)) {
    if(!empty($productId_IN)) {
@@ -33,27 +32,28 @@ $totalPrice_IN = $productAmount_IN * $productPrice['0'];
          }
       
          $existingCartId = $orderrow_object->checkUserId($userId_IN);
+         //$checkoutStatus = $orderrow_object->getCheckoutStatus($userId_IN);
+        $cartId_IN =  $orderrow_object->getCartId($userId_IN);
 
-         if (($existingCartId[0] == $userId_IN) === true ) {
+/*          if ($orderrow_object->ischeckoutStatusChecked($cartId_IN)) {
+            echo "Sant";
+         } else {
+            echo "Nääheppp";
+         } */
+         
+       if (($existingCartId[0] == $userId_IN) === true) {
+           // if (($checkoutStatus[0][0] === NULL || 1)) 
             $cartId = $orderrow_object->getCartId($userId_IN);
             $cartId_IN = $cartId['0'];
             $orderrow_object->addProductToOrderrow($productAmount_IN, $totalPrice_IN, $productId_IN, $cartId_IN);
             die;
 
          }   else {
-            $orderrow_object->createCart($userId_IN);
+             $orderrow_object->createCart($userId_IN);
             $cartId = $orderrow_object->getCartId($userId_IN);
             $cartId_IN = $cartId['0'];
-            $orderrow_object->addProductToOrderrow($productAmount_IN, $totalPrice_IN, $productId_IN, $cartId_IN);
-         } 
- 
-
-      //print_r($orderrow_object->isUserIdTaken($userId_IN));
-/*       $orderrow_object->createCart($userId_IN);
-      $cartId = $orderrow_object->getCartId($userId_IN);
-      $cartId_IN = $cartId['0'];
-      
-      $orderrow_object->addProductToOrderrow($productAmount_IN, $totalPrice_IN, $productId_IN, $cartId_IN); */
+            $orderrow_object->addProductToOrderrow($productAmount_IN, $totalPrice_IN, $productId_IN, $cartId_IN);  
+         }  
      
       } else {
          echo "Error: TokenId cannot be empty!";

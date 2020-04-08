@@ -1,4 +1,18 @@
-# PLANERING AV PROJEKT
+#  PROJEKT - SKAPA EN E-HANDEL
+
+## Skapa databas 
+
+1. Gå in på: https://github.com/Johannahaggman1/api_project.git
+2. Gå in på "ecommerce.sql" filen och följ den för att återskapa databasen. 
+
+## Namngivning 
+Alla variabel/metod/objekt/variabler är namngivna med så beskrivande som möjligt, för att göra det enklare att förstå koden. 
+Endpoints/metoder är döpta med camelcase. Variabler som används i samband med metoder är döpta $vartiabelnamn_IN eller $variabelnamn_param, 
+för att göra det tydligt att de används i samband med metod/query:s.  
+
+## Frontend
+-> apitester.html 
+Kan användas till att prova de olika funktionerna i projektet.  
 
 ## MAPPSTRUKTUR 
 
@@ -6,14 +20,34 @@
 Här sätts databasens inställningar och här ansluts även databasen. Det ska även finnas ett errormeddelande om anslutningen skulle misslyckas. 
 
 ### OBJECTS 
-Här skapas och sparas klasser som kan hämtas och användas i projektet, klasserna innehåller alla nödvändiga metoder och egenskaper. 
+Här skapas och sparas klasser som kan hämtas och användas i de olika endpoint:sen, klasserna innehåller nödvändiga metoder och egenskaper för att 
+kunna skapa olika funktionaliteter i projektet. 
+- Orderrows: Innehåller det som hör till orderrader och kundvagnen
+- Products: Innehåller det som rör produkthantering 
+- Users: Innehåller det som rör kundhantering
 
 ### V1 / cart
-I varukorgen har jag valt att dela upp php filerna för de olika funktionerna som varukorgen måste ha. I varukorgen ska man kunna lägga till produkter, koden för det kommer att finnas i addProduct.php. Man ska även kunna avsluta köp och koden för det kommer finnas i checkOut.php. Sen ska man även kunna ta bort varor från varukorgen och koden för det kommer finnas i removeProduct.php.
+I den här mappen ligger alla endpoints som hör till varukorgen.
+- Checka ut varukorg
+- Visa varukort : dvs de orderrader som ligger i varukorgen
 
-# V1 / product 
-Här ska man man kunna uppdatera, sortera och visa produkter. 
+### V1 / orderrow
+I den här mappen ligger alla endpoints som hör till order rader, dvs. produkter som ligger i en varukorgen. 
+- Lägga till orderrad 
+- Radera orderrad 
+- Uppdatera orderrad
+- Visa specifik orderrad
 
-# V1 / users 
+### V1 / product 
+I den här mappen ligger alla endpoints som hör till produkthantering.
+- Lägga till produkt 
+- Radera produkt 
+- Uppdatera produkt 
+- Visa produkt 
+- Visa alla produkter 
 
+### V1 / users 
+I den här mappen ligger alla endpoints som hör till användarhantering.
+- Logga in användare 
+- Registrera användare
 
