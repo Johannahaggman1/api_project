@@ -31,18 +31,14 @@ if(!empty($_POST['token'])) {
 
     } else {
 
-        // här borde man kanske skapa en separat funktion i ex "users.php" dit man hänvisar så man slipper upprepa. 
         $retObject = new stdClass;
         $retObject->error = "Invalid id!";
         $retObject->errorCode = 556;
-
         echo json_encode($retObject);
     }
-
 } else {
     $retObject = new stdClass;
     $retObject->error = "No token found!";
     $retObject->errorCode = 557;
-
     echo json_encode($retObject);
 }

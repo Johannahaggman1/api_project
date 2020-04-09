@@ -16,6 +16,31 @@ Kan användas till att prova de olika funktionerna i projektet.
 
 ## MAPPSTRUKTUR 
 
+### Användarhantering
+
+Som Admin: 
+- Lägga till produkt 
+- Radera produkt 
+- Uppdatera produkt
+(Samt allt resterande)
+
+Som inloggad(Icke admin):
+- Logga in 
+- Visa produkt 
+- Visa produkter
+- Lägga i varukorg
+- Ta bort från varukort
+- Ändra antal produkter lagda i varukorg
+- Visa varukorgsrad
+- Visa varukorg
+- Checka ut varukorg
+
+Om man inte har loggat in ska man kunna:
+- Registrera sig 
+- Visa produkt 
+- Visa produkter 
+
+
 ### CONFIG / database_handler 
 Här sätts databasens inställningar och här ansluts även databasen. Det ska även finnas ett errormeddelande om anslutningen skulle misslyckas. 
 

@@ -14,9 +14,10 @@ $tokenId_IN = ( isset($_POST['token']) ? $_POST['token'] : '' );
 $userId_IN = ( isset($_POST['userId']) ? $_POST['userId'] : '');
 
 
+
 $productPrice = $product_object->getProductPrice($productId_IN);
 $totalPrice_IN = $productAmount_IN * $productPrice['0'];
- 
+
  if(!empty($productAmount_IN)) {
    if(!empty($productId_IN)) {
       if(!empty($tokenId_IN)) {
@@ -30,19 +31,23 @@ $totalPrice_IN = $productAmount_IN * $productPrice['0'];
              echo json_encode($retObject);
              die();
          }
-      
-         $existingCartId = $orderrow_object->checkUserId($userId_IN);
-         //$checkoutStatus = $orderrow_object->getCheckoutStatus($userId_IN);
-        $cartId_IN =  $orderrow_object->getCartId($userId_IN);
 
-/*          if ($orderrow_object->ischeckoutStatusChecked($cartId_IN)) {
-            echo "Sant";
-         } else {
-            echo "Nääheppp";
-         } */
          
-       if (($existingCartId[0] == $userId_IN) === true) {
-           // if (($checkoutStatus[0][0] === NULL || 1)) 
+         $cartId_IN =  $orderrow_object->getCartId($userId_IN);
+         
+         $checkoutStatus = $orderrow_object->getCheckoutStatus($cartId_IN['Id']);
+         
+         $existingCartId = $orderrow_object->checkUserId($userId_IN);
+
+
+         if ($orderrow_object->isProductIdTaken($productId_IN, $userId_IN) === true) {
+            echo "Produkten du valt finns redan i din varukorg, ändra produkt mängd i 'uppdatera varukorg'!";
+            die;
+         } 
+
+       if (($existingCartId[0] == $userId_IN) === true && $checkoutStatus['checkoutStatus'] == 0) {
+        
+           
             $cartId = $orderrow_object->getCartId($userId_IN);
             $cartId_IN = $cartId['0'];
             $orderrow_object->addProductToOrderrow($productAmount_IN, $totalPrice_IN, $productId_IN, $cartId_IN);

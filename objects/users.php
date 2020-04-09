@@ -167,9 +167,6 @@
                     return json_encode($return_object);
                 } else {
                     echo "fel login";
-                    //kan du echo ut användarnman och lösenord?
-                    //har inte provat 
-                  
                 }
 
                 
@@ -203,7 +200,6 @@
 
                     
                     if(!empty($return['token'])) {
-                        // token finns
 
                         $token_timestamp = $return['date_updated'];
                         $diff = time() - $token_timestamp;

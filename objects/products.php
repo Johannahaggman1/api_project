@@ -19,10 +19,7 @@ class Products {
     }
 
     public function fetchSingleProduct() {
-
-        //Ändrade WHERE id=:product_id till Id med stort i
         
-
         $query_string = "SELECT Id, productName, price, stockamount FROM products WHERE Id=:product_id";
         $statementHandler = $this->database_handler->prepare($query_string);
 
@@ -134,9 +131,6 @@ class Products {
             
         }
 
-        // Testar att byta content till stockamount , 
-        //Ändrade även [id] till [Id]
-
         if(!empty($data['stockamount'])) {
             $query_string = "UPDATE products SET stockamount=:stockamount WHERE Id=:product_id";
             $statementHandler = $this->database_handler->prepare($query_string);
@@ -159,33 +153,23 @@ class Products {
 
     }
 
+    public function deleteProduct($productId_param) {
 
-    // Ett försök att skapa DELETEproduct funktion
-
-    public function deleteProduct($data) {
-
-
-        if(!empty($data['Id'])) {
             $query_string = "DELETE FROM products WHERE Id=:product_id";
             $statementHandler = $this->database_handler->prepare($query_string);
 
-            $statementHandler->bindParam(":product_id", $data['Id']);
+            
+            $statementHandler->bindParam(":product_id", $productId_param);
+            $success = $statementHandler->execute();
 
-            $statementHandler->execute();
+            if($success === true) {
+            echo "Produkt har nu raderats";
+            } else {
+                echo "Produkten ligger i en varukorg, ta bort produkten ur varukorg innan du försöker igen!";
+            }
             
         }
 
-    
-        $query_string = "SELECT Id FROM products WHERE Id=:product_id";
-        $statementHandler = $this->database_handler->prepare($query_string);
-
-        $statementHandler->bindParam(":product_id", $data['Id']);
-        $statementHandler->execute();
-
-        echo json_encode($statementHandler->fetch());
-
-
-    }
 
     public function getProductPrice($productId_param) {
 

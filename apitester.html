@@ -82,7 +82,6 @@
 
         <h2>Lägg till produkt:</h2>
 
-    <!-- Ändrade även name="title" till "name"  -->
         <form class="form">
             <input type="text" name="url" placeholder="http://" value="http://localhost/ApiProjekt/V1/products/addProduct.php" /><br />
             <input type="text" name="productName" placeholder="productName" /><br />
@@ -102,7 +101,7 @@
             <input type="text" name="token" placeholder="token" /><br />
 
             <input type="text" name="url" placeholder="http://" value="http://localhost/ApiProjekt/V1/products/updateProduct.php" /><br />
-            <input type="number" name="Id" placeholder="Id" /><br />
+            <input type="number" name="Id" placeholder="productId" /><br />
 
             <input type="text" name="productName" placeholder="productName" /><br />
             <input type="number" name="price" placeholder="price" /><br /> 
@@ -143,7 +142,6 @@
 
 <form class="form">
     <input type="text" name="token" placeholder="token" /><br />
-
     <input type="text" name="url" placeholder="http://" value="http://localhost/ApiProjekt/V1/products/deleteProduct.php" /><br />
     <input type="number" name="Id" placeholder="Id" /><br />
     GET: <input type="radio" name="method" value="get" checked /> POST: <input type="radio" name="method"
@@ -203,7 +201,7 @@
 <form class="form">
     <input type="text" name="url" placeholder="http://" value="http://localhost/ApiProjekt/V1/cart/checkoutCart.php" /><br />
     <input type="text" name="token" placeholder="token" /><br />
-    <input type="number" name="userId" placeholder="userId" /><br />
+    <input type="number" name="cartId" placeholder="cartId" /><br />
     GET: <input type="radio" name="method" value="get" checked /> POST: <input type="radio" name="method"
         value="post" /><br />
     <input type="submit" />

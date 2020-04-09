@@ -32,22 +32,19 @@ class Orderrow {
         }
     }
 
-    public function checkoutCart($checkoutStatus_param, $userId_param) {
-        $query_string = "UPDATE cart SET checkoutStatus=:checkoutStatus_IN WHERE userId=:userId_IN";
+    public function checkoutCart($checkoutStatus_param, $cartId_param) {
+        $query_string = "UPDATE cart SET checkoutStatus=:checkoutStatus_IN WHERE Id=:cartId_IN";
         $statementHandler = $this->database_handler->prepare($query_string);
 
         if($statementHandler !== false) {
 
             $statementHandler->bindParam(":checkoutStatus_IN", $checkoutStatus_param);
-            $statementHandler->bindParam(":userId_IN", $userId_param);
+            $statementHandler->bindParam(":cartId_IN", $cartId_param);
             $statementHandler->execute();
-            
-        
-
+            $statementHandler->fetch();
         } else {
             echo "Couldn't create statement handler!";
         }
-
        }
 
        public function getStockAmount($cartId_param) {
@@ -82,6 +79,22 @@ class Orderrow {
             }
        }
 
+       public function getUserIdInCart ($cartId_param) {
+        $query_string = "SELECT userId FROM cart WHERE userId=cartId_IN";
+        $statementHandler = $this->database_handler->prepare($query_string);
+
+        if($statementHandler !== false) {
+
+            $statementHandler->bindParam(":cartId_IN", $cartId_param);
+
+            $statementHandler->execute();
+            return $statementHandler->fetch();
+
+            } else {
+                echo "Error while trying to insert product to database!";
+            }
+       }
+       
 
 
        public function updatestockAmount ($cartId_param) {
@@ -115,7 +128,7 @@ class Orderrow {
             }
        }
 
-    public function checkUserId($userId_param) {
+       public function checkUserId($userId_param) {
         $query_string = "SELECT userId FROM cart WHERE userId=:userId_IN";
         $statementHandler = $this->database_handler->prepare($query_string);
 
@@ -159,22 +172,21 @@ class Orderrow {
         }
     }
 
-    public function getCheckoutStatus($userId_param) {
+    public function getCheckoutStatus($cartId_param) {
 
-        $query_string = "SELECT checkoutStatus FROM cart WHERE userId=:userId_IN AND checkoutStatus=0";
+        $query_string = "SELECT checkoutStatus FROM cart WHERE Id=:cartId_IN";
         $statementHandler = $this->database_handler->prepare($query_string);
 
         if($statementHandler !== false) {
 
-            $statementHandler->bindParam(":userId_IN", $userId_param);
+            $statementHandler->bindParam(":cartId_IN", $cartId_param);
             $statementHandler->execute();
-            return $statementHandler->fetchAll();
+            return $statementHandler->fetch();
 
         } else {
             echo "Could not create database statement!";
             die();
         }
-        
     }
 
 
@@ -192,8 +204,7 @@ class Orderrow {
         } else {
             echo "Could not create database statement!";
             die();
-        }
-        
+        }   
     } 
 
     public function fetchOrderrowId($orderId_param) {
@@ -212,8 +223,6 @@ class Orderrow {
             die();
         }
     }
-
-
 
     public function deleteOrderrow($orderrowId_param) {
 
@@ -302,10 +311,8 @@ class Orderrow {
             }
 
         }
-            
-        /// ETT FÖRSÖK 
 
- /*        public function addToOrderrow($productAmount_param, $totalPrice_param, $productId_param, $cartId_param) {
+        public function addToOrderrow($productAmount_param, $totalPrice_param, $productId_param, $cartId_param) {
             $return_object = new stdClass();
     
             if($this->isProductIdTaken($productId_IN) === false) {
@@ -319,20 +326,13 @@ class Orderrow {
                         $return_object->user = $return;
     
                     }  else {
-    
                         $return_object->state = "ERROR";
                         $return_object->message = "Something went wrong when trying to INSERT";
-    
                     }
-    
-    
                 } else {
-
-
                     $return_object->state = "ERROR";
                     $return_object->message = "Checkoutstatus is already checked out";
                 }
-    
             } else {
                 $return_object->state = "ERROR";
                 $return_object->message = "ProductId is taken";
@@ -375,25 +375,23 @@ class Orderrow {
                 } else {
                     return false;
                 }
-    
-    
            }
     
+           public function isProductIdTaken($productId_param, $userId_param) {
     
-    
-           private function isProductIdTaken($productId_param) {
-    
-                $query_string = "SELECT COUNT(Id) FROM orderrows WHERE productId=:productId_IN";
+                $query_string = "SELECT COUNT(productId) FROM orderrows JOIN cart ON orderrows.cartId=cart.Id WHERE productId=:productId_IN AND userId=:userId_IN";
                 $statementHandler = $this->database_handler->prepare($query_string);
     
                 if($statementHandler !== false ){
     
                     $statementHandler->bindParam(":productId_IN", $productId_param);
+                    $statementHandler->bindParam(":userId_IN", $userId_param);
                     $statementHandler->execute();
     
                     $numberOfProductId = $statementHandler->fetch()[0];
     
                     if($numberOfProductId > 0) {
+                        
                         return true; 
                     } else {
                         return false;
@@ -405,17 +403,15 @@ class Orderrow {
                     die;
                 }
             }
-    
-    
             
-            
-            public function ischeckoutStatusChecked($cartId_IN) {
+            public function ischeckoutStatusChecked($checkoutStatus_param, $cartId_IN) {
                 
-                $query_string = "SELECT COUNT(Id) FROM cart WHERE checkoutStatus=1 AND Id=:cartId_IN";
+                $query_string = "SELECT COUNT(Id) FROM cart WHERE checkoutStatus=:checkoutStatus_IN AND Id=:cartId_IN";
                 $statementHandler = $this->database_handler->prepare($query_string);
     
                 if($statementHandler !== false ){
     
+                    $statementHandler->bindParam(":checkoutStatus_IN", $checkoutStatus_param);
                     $statementHandler->bindParam(":cartId_IN", $cartId_param);
                     $statementHandler->execute();
     
@@ -432,9 +428,6 @@ class Orderrow {
                     echo "Statementhandler fail!";
                     die;
                 }
-            } */
-//// ANtagligen eejjjj    
-        
-
+            } 
 
 }
